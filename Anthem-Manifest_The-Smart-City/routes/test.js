@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
     res.status(500).json({ error: 'Error al obtener los accidentes' });
   }
 });
+/*
 router.get("/:id", function (req, res, next) {
   if (req.params.id == "652795df0f624cb62ba880b8") {
     debug("RECUPERA LOS DATOS: "); 
@@ -48,6 +49,12 @@ router.get("/:id", function (req, res, next) {
     };
     res.json(user);
   } else res.status(404).send("Sorry, item not found!");
+});*/
+router.get("/:id", async function (req, res) {
+ const id = req.params.id;
+ console.log(id);
+ const test = await db.collection("CIUDAD_ACCIDENTALIDAD").findById(req.params.id);
+ res.json({test})
 });
 
 module.exports = router;
