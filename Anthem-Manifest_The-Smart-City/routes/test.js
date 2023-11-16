@@ -51,10 +51,10 @@ router.get("/:id", function (req, res, next) {
   } else res.status(404).send("Sorry, item not found!");
 });*/
 router.get("/:id", async function (req, res) {
- const id = req.params.id;
- console.log(id);
- const test = await db.collection("CIUDAD_ACCIDENTALIDAD").findById(req.params.id);
- res.json({test})
-});
+  const id = req.params.id;
+  console.log(id);
+  const test = await db.collection("CIUDAD_ACCIDENTALIDAD").findOne({_id: new mongoose.Types.ObjectId(id)});
+  res.json({test})
+ });
 
 module.exports = router;
