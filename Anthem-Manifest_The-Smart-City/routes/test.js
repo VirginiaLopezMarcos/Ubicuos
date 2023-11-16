@@ -60,7 +60,7 @@ router.get("/:id", async function (req, res) {
  router.get("/localizacion/:name", async function (req, res) {
   const name = req.params.name;
   console.log(name);
-  const tests = await db.collection("CIUDAD_ACCIDENTALIDAD").find({localizacion: name}).toArray();
+  const tests = await db.collection("CIUDAD_ACCIDENTALIDAD").find({localizacion: new RegExp(name, 'i')}).toArray();
   if (tests.length) {
     res.json({tests})
   } else {
