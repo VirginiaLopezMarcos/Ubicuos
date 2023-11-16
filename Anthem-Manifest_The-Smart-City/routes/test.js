@@ -57,4 +57,15 @@ router.get("/:id", async function (req, res) {
   res.json({test})
  });
 
+ router.get("/localizacion/:name", async function (req, res) {
+  const name = req.params.name;
+  console.log(name);
+  const tests = await db.collection("CIUDAD_ACCIDENTALIDAD").find({localizacion: name}).toArray();
+  if (tests.length) {
+    res.json({tests})
+  } else {
+    res.status(404).send("Sorry, no items found!");
+  }
+});
+
 module.exports = router;
