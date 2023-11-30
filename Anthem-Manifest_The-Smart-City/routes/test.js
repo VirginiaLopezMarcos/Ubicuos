@@ -57,14 +57,20 @@ router.get("/:id", async function (req, res) {
   res.json({test})
  });
 
- router.get("/localizacion/:name", async function (req, res) {
-  const name = req.params.name;
+router.get("/localizacion/:name", async function (req, res) {
+  const name = req.params.name.toUpperCase();
   console.log(name);
-  const tests = await db.collection("CIUDAD_ACCIDENTALIDAD").find({localizacion: new RegExp(name, 'i')}).toArray();
-  if (tests.length) {
-    res.json({tests})
-  } else {
-    res.status(404).send("Sorry, no items found!");
+  
+  if (name.includes("DE") || name.includes("CALL") || name.includes("AVDA") || name.includes("C/") || name.includes("CALL.") || name.includes("AVDA.")) {
+    res.status(404).send("Sorry the word is not allowed!");
+  }
+  else {
+    const tests = await db.collection("CIUDAD_ACCIDENTALIDAD").find({localizacion: new RegExp(name, 'i')}).toArray();
+    if (tests.length) {
+      res.json({tests})
+    } else {
+      res.status(404).send("Sorry, no items found!");
+    }
   }
 });
 
