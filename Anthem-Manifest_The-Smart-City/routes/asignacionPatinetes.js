@@ -51,8 +51,8 @@ router.patch("/:_id", async function (req, res) {
         { new: true }
     );
 
-    if (result.value) {
-        res.json(result.value);
+    if (result) {
+        res.json(result);
     } else {
         res.status(404).send("Document with the given id was not found");
     }
