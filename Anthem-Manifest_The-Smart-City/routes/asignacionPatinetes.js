@@ -44,14 +44,14 @@ router.patch("/:_id", async function (req, res) {
     const id = req.params._id;
     const newTaxifyValue = req.body.Taxify;
 
-    const result = await db.collection("CIUDAD_ASIGNACIONPATINETES").findByIdAndUpdate(
-        id,
-        { $set: /*{ Taxify: newTaxifyValue }*/ req.body },
+    const result = await db.collection("CIUDAD_ASIGNACIONPATINETES").findOneAndUpdate(
+        { _id: new mongoose.Types.ObjectId(id) },
+        { $set: { Taxify: newTaxifyValue } },
         { new: true }
     );
 
-    if (result.value) {
-        res.json(result.value);
+    if (result) {
+        res.json(result);
     } else {
         res.status(404).send("Document with the given id was not found");
     }
