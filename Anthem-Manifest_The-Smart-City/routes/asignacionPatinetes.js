@@ -44,7 +44,7 @@ router.patch("/:_id", async function (req, res) {
     const id = req.params._id;
     const newTaxifyValue = req.body.Taxify;
 
-    const result = await CIUDAD_ASIGNACIONPATINETES.findByIdAndUpdate(
+    const result = await db.collection("CIUDAD_ASIGNACIONPATINETES").findByIdAndUpdate(
         id,
         { $set: /*{ Taxify: newTaxifyValue }*/ req.body },
         { new: true }
