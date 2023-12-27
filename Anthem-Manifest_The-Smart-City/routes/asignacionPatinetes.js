@@ -40,14 +40,13 @@ router.get("/barrio/:name", async function (req, res) {
 });
 
 /* PATCH an asignacionPatinetes by id */
-//Si no funciona usar findByIdAndUpdate
 router.patch("/:_id", async function (req, res) {
     const id = req.params._id;
     const newTaxifyValue = req.body.Taxify;
 
-    const result = await db.collection("CIUDAD_ASIGNACIONPATINETES").findOneAndUpdate(
-        { _id: new mongoose.Types.ObjectId(id) },
-        { $set: { Taxify: newTaxifyValue } },
+    const result = await CIUDAD_ASIGNACIONPATINETES.findByIdAndUpdate(
+        id,
+        { $set: /*{ Taxify: newTaxifyValue }*/ req.body },
         { new: true }
     );
 
