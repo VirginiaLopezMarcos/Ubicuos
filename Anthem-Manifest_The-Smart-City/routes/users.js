@@ -126,8 +126,17 @@ function (req, res, next) {
   });
 });
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('respond with a resource');
-});
+router.get('/', async (req, res) => {
+    try {
+      // Realiza la consulta para obtener todos los accidentes
+      const usuarios = await db.collection("CIUDAD_USUARIOS").find({}).toArray();
+          // Envía los resultados como respuesta
+          res.json(usuarios);
+          
+    } catch (error) {
+      // Maneja los errores y envía una respuesta de error
+      res.status(500).json({ error: 'Error al obtener los accidentes' });
+    }
+  });
 
 module.exports = router;

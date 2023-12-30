@@ -18,15 +18,15 @@ var UserSchema = new Schema({
         type: String,
         required: true
     },
-    //fullname: String,
-    //email: {
-        //type: String,
-        //required: true
-    //},
-    creationdate: {
-        type: Date,
-        default: Date.now
-    }
+    fullname: String,
+    email: {
+        type: String,
+        required: true
+    },
+    //creationdate: {
+      //  type: Date,
+       // default: Date.now
+    //}
 });
 
 /* El pre middleware se ejecuta antes de que suceda la operacion. 
