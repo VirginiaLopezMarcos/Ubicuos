@@ -5,7 +5,7 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('anthem-manifest-the-smart-city:server');
+var debug = require('debug')('SmartCity:server');
 var http = require('http');
 
 /**
