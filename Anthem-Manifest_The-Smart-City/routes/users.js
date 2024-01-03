@@ -113,7 +113,7 @@ function (req, res, next) {
 },
 function (req, res, next) {
     debug("... generando token");
-    jwt.sign({username: req.body.username},process.env.TOKEN_SECRET, {expiresIn: 3600 // expira en 1 hora...
+    jwt.sign({email: req.body.email},process.env.TOKEN_SECRET, {expiresIn: 3600 // expira en 1 hora...
     }, function(err, generatedToken) {
         if (err) res.status(500).send("¡Error generando token de autenticación");
         else res.status(200).send({
