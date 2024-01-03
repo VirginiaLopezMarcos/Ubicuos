@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var debug = require("debug")("microblogging-example-api:server");
+var debug = require("debug")("SmartCity:server");
 
 
 //Para la encriptación del password
@@ -9,18 +9,11 @@ var bcrypt = require("bcryptjs");
 var SALT_WORK_FACTOR = 10;
 
 var UserSchema = new Schema({
-    username: {
-        type: String,
-        required: true,
-        index: {
-            unique: true
-        }
-    },
-    password: {
+    email: {
         type: String,
         required: true
     },
-    email: {
+    password: {
         type: String,
         required: true
     }

@@ -88,7 +88,7 @@ router.post("/signin",
 function (req, res, next) {
     debug("login");
         User.findOne({
-            username: req.body.username
+            email: req.body.email
         })
         .then(user => {
             if (user != null) {
