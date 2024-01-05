@@ -38,6 +38,7 @@ router.get('/', async (req, res) => {
       }
        // Hash the password
     const hashedPassword = await bcrypt.hash(user.login.password, saltRounds);
+    console.log(`email: ${user.email}, contraseña: ${user.login.password}`);
 
       return {
         username: `${user.name.first} ${user.name.last}`,
