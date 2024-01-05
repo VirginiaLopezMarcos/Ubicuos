@@ -1,0 +1,6 @@
+En el crontab he añadido las sigueintes líneas para programar la ejecución del bash:
+
+0 0 * * 1 /home/virginia/labUbicuos/Ubicuos/recogerUsuarios
+0 0 * * 4 /home/virginia/labUbicuos/Ubicuos/recogerUsuarios
+#para comprobar que se ejecuta bien, descomentar la siguiente linea para programarlo para que se ejecute dentro de un minuto
+#* * * * * sleep 60 && /home/virginia/labUbicuos/Ubicuos/recogerUsuarios
