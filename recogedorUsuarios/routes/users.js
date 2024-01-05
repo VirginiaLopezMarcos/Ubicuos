@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const mongoose = require('mongoose');
-
+const jwt = require('jsonwebtoken'); 
 // Conexión a la base de datos MongoDB
 mongoose.connect('mongodb+srv://VIRGINIALOPEZMARCOS:muVhxeDthxa408fU@cluster1.jprjpoe.mongodb.net/', {
   useNewUrlParser: true,
