@@ -3,6 +3,9 @@ const router = express.Router();
 const axios = require('axios');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+
 // Conexión a la base de datos MongoDB
 mongoose.connect('mongodb+srv://VIRGINIALOPEZMARCOS:muVhxeDthxa408fU@cluster1.jprjpoe.mongodb.net/', {
   useNewUrlParser: true,
@@ -33,16 +36,20 @@ router.get('/', async (req, res) => {
         // Por ejemplo, podrías generar un nuevo nombre de usuario
         username = `${username} ${Math.floor(Math.random() * 1000)}`;
       }
-      // Generar un token para el email del usuario
-      const emailToken = jwt.sign({ email: user.email }, 'unaclavesecretabuenaParagenerarTokens1234');
+       // Hash the password
+    const hashedPassword = await bcrypt.hash(user.login.password, saltRounds);
+
       return {
         username: `${user.name.first} ${user.name.last}`,
-        email: emailToken, // Guarda el token en lugar del email
-        password: user.login.password,
+        email:user.email,
+        password: hashedPassword,
       };
       
     });
-      
+    // Generar un token para cada usuario
+    usersToSave.forEach(user => {
+    user.token = jwt.sign({ email: user.email }, 'calvesupersecretaparatoken1234567890');
+  });
     Promise.all(usersToSave)
       .then(users => {
         UserModel.insertMany(users)
