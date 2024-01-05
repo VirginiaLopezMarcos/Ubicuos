@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# Navega al directorio donde se encuentra tu proyecto de Node.js
+cd /home/virginia/labUbicuos/Ubicuos/recogedorUsuarios
+
+# Ejecuta el comando npm run start en segundo plano
+npm run start:dev_linux &
+
+# Espera unos segundos para asegurarse de que el servidor Node.js esté funcionando
+sleep 5
+
+# Realiza la solicitud GET con curl al servidor local
+curl -v http://localhost:5000/users
+
+# Reemplaza 'puerto' con el número de puerto en el que se está ejecutando tu servidor Node.js (por ejemplo, 3000)
+
