@@ -4,6 +4,7 @@ const axios = require('axios');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken'); 
 const bcrypt = require('bcrypt');
+var debug = require('debug')('recogedorUsuarios:server');
 const saltRounds = 10;
 
 // Conexión a la base de datos MongoDB
@@ -11,9 +12,9 @@ mongoose.connect('mongodb+srv://VIRGINIALOPEZMARCOS:muVhxeDthxa408fU@cluster1.jp
   useNewUrlParser: true,
   useUnifiedTopology: true,
 }).then(() => {
-  console.log('Conexión exitosa a la base de datos');
+  debug("MongoDB Atlas DataBase connection successful");
 }).catch(err => {
-  console.error('Error al conectarse a la base de datos:', err);
+  debug('Error al conectarse a la base de datos:', err);
 });
 
 const UserSchema = new mongoose.Schema({
@@ -55,16 +56,16 @@ router.get('/', async (req, res) => {
       .then(users => {
         UserModel.insertMany(users)
           .then(() => {
-            console.log('Datos almacenados en la base de datos');
+            debug('Datos almacenados en la base de datos');
             process.exit(0); // Cierra el programa
           })
           .catch(error => {
-            console.error('Error al insertar datos en la base de datos:', error);
+            debug('Error al insertar datos en la base de datos:', error);
             process.exit(1); // Cierra el programa con un código de error
           });
       })
       .catch(error => {
-        console.error('Error al procesar los usuarios:', error);
+        debug('Error al procesar los usuarios:', error);
         process.exit(1); // Cierra el programa con un código de error
 
       });

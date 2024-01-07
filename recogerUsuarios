@@ -1,8 +1,7 @@
 #!/bin/bash
 
 # Navega al directorio donde se encuentra tu proyecto de Node.js
-cd ~
-cd Ubicuos/recogedorUsuarios
+cd ./recogedorUsuarios
 
 # Ejecuta el comando npm run start en segundo plano
 npm run start:dev_linux &
