@@ -7,7 +7,7 @@ const dotenv = require('dotenv');
 // get config vars
 dotenv.config();
 
-var debug = require("debug")("anthem-manifest-the-smart-city:server");
+var debug = require("debug")("SmartCity:server");
 
 //Models
 var User = require("../models/User.js");
@@ -45,41 +45,10 @@ function (req, res, next) {
     .json(users)).catch(err => res.status(500).send(err))
 });
 
-// GET de un único usuario por su Id
-router.get("/secure/:id", tokenVerify, function (req, res, next) {
-    debug("Acceso seguro con token a un usuario");
-    User.findById(req.params.id)
-    .then(userinfo => res.status(200).json(userinfo))
-    .catch(err => res.status(500).send(err));
-});
-
 // POST de un nuevo usuario
 router.post("/", function (req, res, next) {
     User.create(req.body)
     .then(() => res.sendStatus(200).json(userinfo))
-    .catch(err => res.status(500).send(err));
-});
-
-// POST de un nuevo usuario
-router.post("/secure", tokenVerify, function (req, res, next) {
-    debug("Creación de un usuario segura con token");
-    User.create(req.body)
-    .then(userinfo => res.sendStatus(200))
-    .catch(err => res.status(500).send(err));
-});
-
-router.put("/secure/:id", tokenVerify, function (req, res, next) {
-    debug("Modificación segura de un usuario con token");
-    User.findByIdAndUpdate(req.params.id, req.body)
-    .then(userinfo => res.sendStatus(200))
-    .catch(err => res.status(500).send(err));
-});
-
-// DELETE de un usuario existente identificado por su Id
-router.delete("/secure/:id", tokenVerify, function (req, res, next) {
-    debug("Borrado seguro de un usuario con token");
-    User.findByIdAndDelete(req.params.id)
-    .then(userinfo => res.sendStatus(200))
     .catch(err => res.status(500).send(err));
 });
 
@@ -121,19 +90,5 @@ function (req, res, next) {
        });
     });
 });
-
-/* GET users listing. */
-router.get('/', async (req, res) => {
-    try {
-      // Realiza la consulta para obtener todos los accidentes
-      const usuarios = await db.collection("users").find({}).toArray();
-          // Envía los resultados como respuesta
-          res.json(usuarios);
-          
-    } catch (error) {
-      // Maneja los errores y envía una respuesta de error
-      res.status(500).json({ error: 'Error al obtener los accidentes' });
-    }
-  });
 
 module.exports = router;
